@@ -1,58 +1,99 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+#课程第一章
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+从本章节开始，我们将使用 Laravel 开发一个类似新浪微博的网站。整个网站功能包括：
+用户的注册登录
+用户个人信息的更改
+使用管理员权限删除用户
+发布微博
+关注用户
+查看关注用户的微博动态
+接下来我们将从最简单的静态页面构建开始，踏出使用 Laravel 开发真实应用的第一步。
+> cd ~/Homestead && vagrant up
+> vagrant ssh  
+$ cd ~/Code  
+$ composer create-project laravel/laravel sample --prefer-dist "5.5.*"
+> subl /etc/hosts  
+> 192.168.10.10   sample.test  
+> subl ~/Homestead/Homestead.yaml  
+````
+ip: "192.168.10.10"
+memory: 2048
+cpus: 1
+provider: virtualbox
 
-## About Laravel
+authorize: ~/.ssh/id_rsa.pub
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+keys:
+    - ~/.ssh/id_rsa
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+folders:
+    - map: ~/Code
+      to: /home/vagrant/Code
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+sites:
+    - map: homestead.test
+      to: /home/vagrant/Code/Laravel/public
+    - map: sample.test # <--- 这里
+      to: /home/vagrant/Code/sample/public # <--- 这里
 
-## Learning Laravel
+databases:
+    - homestead
+    - sample # <--- 这里
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+variables:
+    - key: APP_ENV
+      value: local
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+# blackfire:
+#     - id: foo
+#       token: bar
+#       client-id: foo
+#       client-token: bar
 
-## Laravel Sponsors
+# ports:
+#     - send: 93000
+#       to: 9300
+#     - send: 7777
+#       to: 777
+#       protocol: udp  
+````
+> cd ~/Homestead && vagrant provision && vagrant reload  
+#####.env
+```
+.
+.
+.
+DB_DATABASE=sample
+.
+.
+.
+APP_ENV=local
+APP_DEBUG=true
+APP_KEY=your_app_key
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_DATABASE=sample
+DB_USERNAME=homestead
+DB_PASSWORD=secret
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Pulse Storm](http://www.pulsestorm.net/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MAIL_DRIVER=smtp
+MAIL_HOST=mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+```
+#####Git 代码版本控制
+````
+$ cd ~/Code/sample
+$ git init
+$ git add -A
+$ git commit -m "Initial commit"
+$ git remote add origin git@github.com:<username>/sample.git
+$ git push -u origin master
+````
