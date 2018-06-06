@@ -97,3 +97,10 @@ $ git commit -m "Initial commit"
 $ git remote add origin git@github.com:<username>/sample.git
 $ git push -u origin master
 ````
+#####新建分支
+````
+$ git checkout master
+$ git checkout -b static-pages
+$ git merge fake-branch``
+$ git branch -d fake-branch
+````
