@@ -104,3 +104,21 @@ $ git checkout -b static-pages
 $ git merge fake-branch``
 $ git branch -d fake-branch
 ````
+#重要的知识点
+####添加语言包
+````
+$ composer require "overtrue/laravel-lang:~3.0"  
+   config/app.php
+<?php
+
+return [
+    .
+    .
+    .
+    'locale' => 'zh-CN',
+    .
+    .
+    .
+];    
+````
+[overtrue/laravel-lang 中文使用说明](https://github.com/overtrue/laravel-lang/blob/master/README_CN.md)
