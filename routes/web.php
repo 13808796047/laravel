@@ -19,3 +19,4 @@ Route::get('login','SessionController@create')->name('login');
 Route::post('login','SessionController@store')->name('login');
 //Route::resource('sessions','SessionController',['only'=>['create','store']]);
 Route::delete('logout','SessionController@destroy')->name('logout');
+Route::get('signup/confirm/{token}','UserController@confirmEmail')->name('confirm.email');
